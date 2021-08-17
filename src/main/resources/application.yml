@@ -1,0 +1,19 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  data:
+    mongodb:
+      username: root
+      password: root
+      database: testdb
+      port: 27017
+      host: localhost
+  cloud:
+    stream:
+      bindings:
+        ClaimReqEventInput:
+          destination: claimSubmitted.exchange
+          group: processor
