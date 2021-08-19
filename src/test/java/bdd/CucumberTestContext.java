@@ -1,9 +1,20 @@
 package bdd;
 
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.ComponentScan;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import org.springframework.boot.test.context.TestComponent;
+import space.gavinklfong.demo.insurance.dto.ClaimRequest;
+import space.gavinklfong.demo.insurance.model.ClaimReviewResult;
 
-@TestConfiguration
-@ComponentScan(basePackages = {"bdd"})
+@TestComponent
+@RequiredArgsConstructor
+@Data
 public class CucumberTestContext {
+    private ClaimRequest claimRequest;
+    private ClaimReviewResult receivedClaimUpdate;
+
+    public void reset() {
+        claimRequest = null;
+        receivedClaimUpdate = null;
+    }
 }

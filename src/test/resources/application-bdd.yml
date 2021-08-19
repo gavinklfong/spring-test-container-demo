@@ -6,11 +6,7 @@ spring:
     password: guest
   data:
     mongodb:
-      username: root
-      password: root
-      database: testdb
-      port: 27017
-      host: localhost
+      uri: mongodb://localhost:27017/testdb
   cloud:
     stream:
       bindings:
@@ -22,4 +18,3 @@ spring:
         claimStatusEventInput:
           destination: claimUpdated.exchange
           group: receiver
-

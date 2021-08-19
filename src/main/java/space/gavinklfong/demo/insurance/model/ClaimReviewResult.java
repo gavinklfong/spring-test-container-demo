@@ -8,9 +8,8 @@ import org.springframework.data.annotation.Id;
 @Data
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ClaimProcess {
+public class ClaimReviewResult {
     @Id
-    String requestId;
     String claimId;
     String customerId;
     Status status;
