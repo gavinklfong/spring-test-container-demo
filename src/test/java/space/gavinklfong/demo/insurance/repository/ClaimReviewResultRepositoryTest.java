@@ -17,11 +17,10 @@ import space.gavinklfong.demo.insurance.model.Status;
 import java.util.List;
 import java.util.UUID;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Slf4j
 @Testcontainers
-//@ContextConfiguration(initializers = ClaimProcessRepositoryTest.Initializer.class)
 @DataMongoTest(excludeAutoConfiguration = EmbeddedMongoAutoConfiguration.class)
 public class ClaimReviewResultRepositoryTest {
 
@@ -42,7 +41,7 @@ public class ClaimReviewResultRepositoryTest {
     }
 
     @Test
-    void whenSaveRecord_thenRecordCountShouldBeTheSame() {
+    void givenRecordsAreSaved_whenFindAllRecords_thenRecordCountShouldBeTheSame() {
         claimProcessRepo.save(ClaimReviewResult.builder()
                 .claimId(UUID.randomUUID().toString())
                 .status(Status.APPROVED)
@@ -58,5 +57,4 @@ public class ClaimReviewResultRepositoryTest {
 
         assertEquals(2, claims.size());
     }
-
 }

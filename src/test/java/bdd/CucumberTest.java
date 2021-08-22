@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         plugin = {"pretty", "json:target/reports/cucumber/cucumber.json"},
-        features = "classpath:bdd/ClaimProcessing.feature",
+        features = "classpath:bdd",
         glue = {"bdd"}
 )
 public class CucumberTest {

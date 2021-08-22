@@ -1,8 +1,8 @@
 package bdd;
 
+import io.cucumber.java.After;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
@@ -12,12 +12,12 @@ public class CucumberScenarioLifecycle {
     @Autowired
     private CucumberTestContext testContext;
 
-    @Before
-    public void setup() {
+    @After
+    public void cleanUp() {
 
         testContext.reset();
 
-        log.info("Setup scenario completed");
+        log.info("Test context clean up completed");
     }
 
 }

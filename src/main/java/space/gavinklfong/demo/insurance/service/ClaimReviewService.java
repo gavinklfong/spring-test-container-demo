@@ -14,7 +14,7 @@ import java.util.Random;
 
 @Slf4j
 @Service
-public class ClaimProcessService {
+public class ClaimReviewService {
 
     private static final int PROCESS_TIME_LOWER_BOUND = 500;
 

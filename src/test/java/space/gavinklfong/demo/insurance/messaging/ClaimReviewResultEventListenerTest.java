@@ -12,8 +12,7 @@ import space.gavinklfong.demo.insurance.dto.Priority;
 import space.gavinklfong.demo.insurance.dto.Product;
 import space.gavinklfong.demo.insurance.model.ClaimReviewResult;
 import space.gavinklfong.demo.insurance.model.Status;
-import space.gavinklfong.demo.insurance.repository.ClaimProcessRepository;
-import space.gavinklfong.demo.insurance.service.ClaimProcessService;
+import space.gavinklfong.demo.insurance.service.ClaimReviewService;
 
 import java.util.UUID;
 
@@ -30,7 +29,7 @@ public class ClaimReviewResultEventListenerTest {
     private ClaimStatusUpdateGateway claimStatusUpdateGateway;
 
     @MockBean
-    private ClaimProcessService claimProcessService;
+    private ClaimReviewService claimReviewService;
 
     @Autowired
     private ClaimReqEventListener claimReqEventListener;
@@ -38,7 +37,7 @@ public class ClaimReviewResultEventListenerTest {
     @Test
     void whenClaimRequestArrived_thenInvokeClaimProcessServiceAndClaimStatusUpdateGataway() {
 
-        when(claimProcessService.processClaimRequest((any(ClaimRequest.class)))).thenAnswer(invocation -> {
+        when(claimReviewService.processClaimRequest((any(ClaimRequest.class)))).thenAnswer(invocation -> {
             ClaimRequest request = (ClaimRequest) invocation.getArgument(0);
             return ClaimReviewResult.builder()
                     .claimId(request.getId())

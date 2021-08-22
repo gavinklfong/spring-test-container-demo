@@ -21,9 +21,6 @@ public class TestContainersSetup {
 
     private static final int MONGODB_PORT = 27017;
     private static final String MONGODB_IMAGE = "mongo";
-    private static final String MONGODB_INITDB_USER = "MONGO_INITDB_ROOT_USERNAME";
-    private static final String MONGODB_INITDB_PASS = "MONGO_INITDB_ROOT_PASSWORD";
-    private static final String MONGODB_INITDB_DATABASE = "MONGO_INITDB_DATABASE";
     private static final Logger MONGODB_LOGGER = LoggerFactory.getLogger("container.MongoDB");
 
     private static final RabbitMQContainer rabbitMqContainer = new RabbitMQContainer(RABBITMQ_IMAGE)
@@ -39,9 +36,6 @@ public class TestContainersSetup {
         rabbitMqContainer.start();
         rabbitMqContainer.followOutput(new Slf4jLogConsumer(RABBITMQ_LOGGER));
 
-//        mongoDBContainer.addEnv(MONGODB_INITDB_USER, configEnv.getProperty("spring.data.mongo.username"));
-//        mongoDBContainer.addEnv(MONGODB_INITDB_PASS, configEnv.getProperty("spring.data.mongo.password"));
-//        mongoDBContainer.addEnv(MONGODB_INITDB_DATABASE, configEnv.getProperty("spring.data.mongo.database"));
         mongoDBContainer.start();
         mongoDBContainer.followOutput(new Slf4jLogConsumer(MONGODB_LOGGER));
     }
@@ -61,5 +55,4 @@ public class TestContainersSetup {
     public static String getMongoDBContainerUri() {
         return mongoDBContainer.getReplicaSetUrl();
     }
-
 }

@@ -3,7 +3,6 @@ package space.gavinklfong.demo.insurance.service;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
@@ -11,7 +10,6 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import space.gavinklfong.demo.insurance.dto.ClaimRequest;
 import space.gavinklfong.demo.insurance.dto.Priority;
 import space.gavinklfong.demo.insurance.dto.Product;
-import space.gavinklfong.demo.insurance.messaging.ClaimReqEventListener;
 import space.gavinklfong.demo.insurance.model.ClaimReviewResult;
 import space.gavinklfong.demo.insurance.model.Status;
 import space.gavinklfong.demo.insurance.repository.ClaimProcessRepository;
@@ -24,15 +22,15 @@ import static org.mockito.Mockito.*;
 
 @Slf4j
 @SpringJUnitConfig
-@ContextConfiguration(classes = {ClaimProcessService.class})
+@ContextConfiguration(classes = {ClaimReviewService.class})
 @Tag("UnitTest")
-public class ClaimProcessServiceTest {
+public class ClaimReviewServiceTest {
 
     @MockBean
     private ClaimProcessRepository claimProcessRepository;
 
     @Autowired
-    private ClaimProcessService claimProcessService;
+    private ClaimReviewService claimReviewService;
 
     @Test
     void givenMedicalClaimWithSmallAmount_whenRunClaimProcess_thenReturnApprovedStatus() {
@@ -48,7 +46,7 @@ public class ClaimProcessServiceTest {
                 .product(Product.MEDICAL)
                 .build();
 
-        ClaimReviewResult result = claimProcessService.processClaimRequest(request);
+        ClaimReviewResult result = claimReviewService.processClaimRequest(request);
 
         verify(claimProcessRepository, times(1)).save((any(ClaimReviewResult.class)));
 
@@ -71,7 +69,7 @@ public class ClaimProcessServiceTest {
                 .product(Product.MEDICAL)
                 .build();
 
-        ClaimReviewResult result = claimProcessService.processClaimRequest(request);
+        ClaimReviewResult result = claimReviewService.processClaimRequest(request);
 
         verify(claimProcessRepository, times(1)).save((any(ClaimReviewResult.class)));
 
@@ -94,7 +92,7 @@ public class ClaimProcessServiceTest {
                 .product(Product.HOME)
                 .build();
 
-        ClaimReviewResult result = claimProcessService.processClaimRequest(request);
+        ClaimReviewResult result = claimReviewService.processClaimRequest(request);
 
         verify(claimProcessRepository, times(1)).save((any(ClaimReviewResult.class)));
 
