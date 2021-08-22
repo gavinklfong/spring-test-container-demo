@@ -2,7 +2,7 @@
 Feature: Claim Processing
   Process claim request triggered by messages
 
-  Scenario Outline: Process claim request for insurance
+  Scenario Outline: Process claim request
     Given claim processing is up and running
     When a claim request of '<product>' policy with claim amount <amount> is submitted queue
     And wait for 2 seconds

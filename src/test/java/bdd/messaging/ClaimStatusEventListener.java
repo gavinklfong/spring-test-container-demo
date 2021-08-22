@@ -1,4 +1,4 @@
-package bdd.insurance.messaging;
+package bdd.messaging;
 
 import bdd.CucumberTestContext;
 import lombok.extern.slf4j.Slf4j;

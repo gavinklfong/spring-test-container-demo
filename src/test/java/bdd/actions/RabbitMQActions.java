@@ -1,4 +1,4 @@
-package bdd.rabbitmq;
+package bdd.actions;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

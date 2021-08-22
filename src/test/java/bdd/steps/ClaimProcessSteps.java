@@ -1,8 +1,8 @@
 package bdd.steps;
 
 import bdd.CucumberTestContext;
-import bdd.mongodb.MonogoDBActions;
-import bdd.rabbitmq.RabbitMQActions;
+import bdd.actions.MonogoDBActions;
+import bdd.actions.RabbitMQActions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -35,6 +35,7 @@ public class ClaimProcessSteps {
     public void claim_processing_is_up_and_running() {
 
     }
+
     @When("wait for {int} seconds")
     public void waitForXSeconds(int seconds) throws InterruptedException {
         TimeUnit.SECONDS.sleep(seconds);

@@ -1,4 +1,4 @@
-package bdd.rabbitmq;
+package bdd.actions;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

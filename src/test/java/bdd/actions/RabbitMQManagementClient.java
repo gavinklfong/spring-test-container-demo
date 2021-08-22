@@ -1,4 +1,4 @@
-package bdd.rabbitmq;
+package bdd.actions;
 
 import org.springframework.boot.test.context.TestComponent;
 

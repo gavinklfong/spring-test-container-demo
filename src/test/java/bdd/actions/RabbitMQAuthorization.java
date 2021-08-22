@@ -1,4 +1,4 @@
-package bdd.rabbitmq;
+package bdd.actions;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
