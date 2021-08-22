@@ -5,7 +5,7 @@ The purpose of this repository is to demonstrate the implementation of a fully a
 
 The sample application is a message driven insurance claim review process.
 
-[Application Component Diagram](https://github.com/gavinklfong/spring-test-container-demo/blob/main/blob/Sample_App.png?raw=true)
+![Application Component Diagram](https://github.com/gavinklfong/spring-test-container-demo/blob/main/blob/Sample_App.png?raw=true)
 
 ## Build
 
@@ -23,7 +23,7 @@ Prior to the test execution, Testcontainers are to be initialized and started. N
 
 The diagram below depicts the initialization process using classes which are highlighted in pink.
 
-[Integration Test Initialization](https://github.com/gavinklfong/spring-test-container-demo/blob/main/blob/Integration_Test_Init_Flow.png?raw=true)
+![Integration Test Initialization](https://github.com/gavinklfong/spring-test-container-demo/blob/main/blob/Integration_Test_Init_Flow.png?raw=true)
 
 ## Integration Test Design
 
@@ -31,4 +31,4 @@ There is a layer to abstract away operations of MongoDB and RabbitMQ in order to
 
 For data sharing among steps, we keep data in test data context. For example, step 3 is able to obtain the claim review update from test data context and verify the field values as the listener puts the data into the context once the application has submitted it to the topic exchange.
 
-[Integration Test Design](https://github.com/gavinklfong/spring-test-container-demo/blob/main/blob/Integration_Test_Run.png?raw=true)
+![Integration Test Design](https://github.com/gavinklfong/spring-test-container-demo/blob/main/blob/Integration_Test_Run.png?raw=true)
