@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import space.gavinklfong.demo.insurance.dto.Product;
 
 @Data
 @Builder
@@ -11,7 +12,9 @@ import org.springframework.data.annotation.Id;
 public class ClaimReviewResult {
     @Id
     String claimId;
+    Product product;
     String customerId;
     Status status;
+    Double claimAmount;
     String remarks;
 }
