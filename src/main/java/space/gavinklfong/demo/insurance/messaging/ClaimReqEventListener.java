@@ -1,5 +1,6 @@
 package space.gavinklfong.demo.insurance.messaging;
 
+import io.micrometer.core.annotation.Timed;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
@@ -18,7 +19,7 @@ public class ClaimReqEventListener {
     @Autowired
     private ClaimStatusUpdateGateway claimStatusUpdateGateway;
 
-    @StreamListener(MessageChannels.CLAIM_REQ_EVENT_INPUT)
+      @StreamListener(MessageChannels.CLAIM_REQ_INPUT)
     public void handleClaimRequestEvent(ClaimRequest claimRequest) {
         ClaimReviewResult result = claimReviewService.processClaimRequest(claimRequest);
         claimStatusUpdateGateway.submitClaimReviewUpdate(result);

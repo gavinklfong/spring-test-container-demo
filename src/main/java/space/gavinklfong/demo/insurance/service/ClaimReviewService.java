@@ -1,6 +1,8 @@
 package space.gavinklfong.demo.insurance.service;
 
 import com.github.javafaker.Faker;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,19 @@ public class ClaimReviewService {
 
     @Autowired
     private ClaimProcessRepository claimProcessRepo;
+
+    private MeterRegistry meterRegistry;
+
+    private Counter approvedClaimCounter;
+    private Counter needFollowupClaimCounter;
+    private Counter declinedClaimCounter;
+
+    public ClaimReviewService(MeterRegistry meterRegistry) {
+        this.meterRegistry = meterRegistry;
+        this.approvedClaimCounter = this.meterRegistry.counter("claim.result", "status", "approved");
+        this.needFollowupClaimCounter = this.meterRegistry.counter("claim.result", "status", "need-followup");
+        this.declinedClaimCounter = this.meterRegistry.counter("claim.result", "status", "declined");
+    }
 
     public ClaimReviewResult processClaimRequest(ClaimRequest claimRequest) {
         log.info("Claim request processing - start - {}", claimRequest.toString());
@@ -46,10 +61,14 @@ public class ClaimReviewService {
                     .customerId(claimRequest.getCustomerId())
                     .claimId(claimRequest.getId())
                     .status(claimStatus)
+                    .product(claimRequest.getProduct())
+                    .claimAmount(claimRequest.getClaimAmount())
                     .remarks(faker.lorem().sentence())
                     .build();
 
             result = claimProcessRepo.save(result);
+
+            updateClaimStatusMetric(result);
 
             long end = System.currentTimeMillis();
             log.info("Claim request processing - end - processing time {}, claim = {}, status = {}", (end - start), claimRequest.toString(), result.getStatus());
@@ -61,6 +80,15 @@ public class ClaimReviewService {
             log.error("claim process failed. processing time = {}, claim = {}", (end - start), claimRequest.toString());
             throw new RuntimeException("claim process failed. id = " + claimRequest.getId());
         }
+    }
 
+    private void updateClaimStatusMetric(ClaimReviewResult result) {
+        if (result.getStatus().equals(Status.APPROVED)) {
+            approvedClaimCounter.increment();
+        } else if (result.getStatus().equals(Status.DECLINED)) {
+            declinedClaimCounter.increment();
+        } else if (result.getStatus().equals(Status.NEED_FOLLOW_UP)) {
+            needFollowupClaimCounter.increment();
+        }
     }
 }
